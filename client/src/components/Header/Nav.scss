@@ -1,0 +1,76 @@
+$color: #ff99cc;
+html {
+  scroll-behavior: smooth;
+}
+#bg-header {
+  color: $color;
+  width: 100%;
+  height: 650px;
+}
+#logo {
+  width: 90px;
+  height: 50px;
+}
+
+#img-header {
+  height: 650px;
+  width: 100%;
+}
+
+.navigation {
+  font-size: 25px;
+  position: fixed;
+  right: 200px;
+  left: 200px;
+  top: 0;
+  transition: top 0.5s;
+  z-index: 1;
+}
+
+.navigation-scroll {
+  top: -70px;
+}
+
+#wrap-navigation li {
+  margin-right: 30px;
+}
+#wrap-navigation li a {
+  color: $color;
+  text-shadow: 1px 1px $color;
+}
+
+#wrap-navigation li a:hover {
+  color: lightblue;
+}
+
+#content-bg {
+  position: relative;
+  text-align: center;
+  bottom: 450px;
+  font-size: 70px;
+}
+
+#btn-let-go {
+  font-size: 50px;
+  border: 2px solid white;
+  border-radius: 10px;
+  background: none;
+  text-decoration: none;
+  color: $color;
+  padding: 5px 10px;
+  transition: all 0.4s;
+}
+
+#btn-let-go:hover {
+  background: brown;
+  color: $color;
+}
+
+@media only screen and (max-width: 800px) {
+  .navigation {
+    font-size: 25px;
+    position: fixed;
+    left: 0;
+    right: 0;
+  }
+}
