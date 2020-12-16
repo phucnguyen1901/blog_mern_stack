@@ -2,8 +2,8 @@ import Header from "./components/Header/Nav";
 import Footer from "./components/Footer/Footer";
 import Me from "./components/Content/Me";
 import Content from "./components/Content/Content";
-import Blog from "./components/Create/Blog";
-import Delete from "./components/Create/Delete";
+import Create from "./components/Handle/Create";
+import Delete from "./components/Handle/Delete";
 import Detail from "./components/Content/Detail";
 import React, { useState, useEffect, useRef } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -27,7 +27,7 @@ function App() {
 
   const [post, setPost] = useState({});
   useEffect(() => {
-    async function createArticles() {
+    async function HandleArticles() {
       if (Object.entries(post).length !== 0) {
         try {
           await axios.post("https://blogphuc.herokuapp.com/api/create", post);
@@ -38,7 +38,7 @@ function App() {
         }
       }
     }
-    createArticles();
+    HandleArticles();
   }, [post]);
 
   function handlePost(post) {
@@ -94,7 +94,7 @@ function App() {
             <Me />
           </Route>
           <Route path="/create">
-            <Blog handlePost={handlePost} />
+            <Create handlePost={handlePost} />
           </Route>
           <Route path="/article/:id">
             <Detail />

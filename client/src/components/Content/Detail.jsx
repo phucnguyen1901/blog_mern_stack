@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import "./Detail.scss";
-function Detail(props) {
+function Detail() {
   const [content, setContent] = useState({});
   let { id } = useParams();
   useEffect(() => {
@@ -18,9 +18,13 @@ function Detail(props) {
     }
     getContent();
   }, [id]);
+
   return (
     <div id="detail">
       <h1>{content.title}</h1>
+      {/* {Object.entries(content).length > 0
+        ? content.content.split(".").map((para) => <li>{para}</li>)
+        : null} */}
       <p>{content.content}</p>
     </div>
   );

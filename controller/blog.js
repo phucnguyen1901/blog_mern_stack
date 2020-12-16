@@ -24,6 +24,7 @@ function blog() {
 
     async createBlog(req, res) {
       const { title, content, author, image } = req.body;
+      console.log(image);
       const blog = new Blog({
         title: title,
         content: content,

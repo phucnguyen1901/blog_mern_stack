@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import "./Blog.scss";
+import "./Create.scss";
 import PropTypes from "prop-types";
 
-Blog.propTypes = {
+Create.propTypes = {
   handlePost: PropTypes.func,
 };
 
-Blog.defaultProps = {
+Create.defaultProps = {
   handlePost: null,
 };
 
-function Blog(props) {
+function Create(props) {
   const { handlePost } = props;
   const [post, setPost] = useState({});
   let urlImage = [
@@ -35,10 +35,11 @@ function Blog(props) {
     setPost({ ...post, image: `${e.target.value}.png` });
   }
 
-  function handleSubmit() {
+  function handleSubmit(e) {
     console.log("da submit");
     if (handlePost) {
       handlePost(post);
+      e.preventDefault();
     }
   }
   return (
@@ -89,4 +90,4 @@ function Blog(props) {
   );
 }
 
-export default Blog;
+export default Create;
