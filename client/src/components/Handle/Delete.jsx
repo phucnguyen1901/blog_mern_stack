@@ -3,17 +3,19 @@ import PropTypes from "prop-types";
 
 Delete.propTypes = {
   handleDeleteId: PropTypes.func,
+  check: PropTypes.bool,
 };
 Delete.defaultProps = {
   handleDeleteId: null,
+  check: false,
 };
 function Delete(props) {
-  const [id, setId] = useState({});
-  const { handleDeleteId } = props;
+  const [id, setId] = useState("");
+  const { handleDeleteId, check } = props;
 
   function getDeleteId(e) {
     console.log(e.target.value);
-    setId({ id: e.target.value });
+    setId(e.target.value);
   }
 
   function submitDeleteId(e) {
@@ -31,8 +33,6 @@ function Delete(props) {
         <button
           type="submit"
           className="btn btn-danger"
-          // type="button"
-          className="btn btn-primary"
           data-toggle="modal"
           data-target="#exampleModal"
           style={{ marginTop: "20px" }}
@@ -52,7 +52,9 @@ function Delete(props) {
         <div className="modal-dialog" role="document">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title" id="exampleModalLabel"></h5>
+              <h5 className="modal-title" id="exampleModalLabel">
+                Delete
+              </h5>
               <button
                 type="button"
                 className="close"
@@ -62,19 +64,25 @@ function Delete(props) {
                 <span aria-hidden="true">×</span>
               </button>
             </div>
-            <div className="modal-body">
-              Đã xóa nhưng không biết có lỗi hay không
-            </div>
+            {check ? (
+              <div className="modal-body">
+                <h3 className="text-success">Deleted successfully</h3>
+              </div>
+            ) : (
+              <div className="modal-body">
+                <h3 className="text-danger">Deleted Unsuccessfully</h3>
+              </div>
+            )}
             <div className="modal-footer">
               <button
                 type="button"
-                className="btn btn-secondary"
+                className="btn btn-danger"
                 data-dismiss="modal"
               >
-                Close
+                Delete More
               </button>
               <a href="/#content" className="btn btn-primary">
-                Quay về trang chủ
+                Back to home page
               </a>
             </div>
           </div>

@@ -46,16 +46,25 @@ function blog() {
     },
 
     async deleteIdBlog(req, res) {
-      const { id } = req.body;
-      await Blog.findByIdAndRemove(id, (err, data) => {
-        if (err) {
-          console.log("Error" + err);
-          res.json({ check: false });
-        } else {
-          console.log("Delete is successfully ");
+      try {
+        const rs = await Blog.deleteOne({ _id: req.params.id });
+        if (rs.deletedCount > 0) {
           res.json({ check: true });
+        } else {
+          res.json({ check: false });
         }
-      });
+      } catch (e) {
+        res.json({ check: false });
+      }
+      // await Blog.findByIdAndRemove(req.params.id, (err, data) => {
+      //   if (err) {
+      //     console.log("Error" + err);
+      //     res.json({ check: false });
+      //   } else {
+      //     console.log("Delete is successfully ");
+      //     res.json({ check: true });
+      //   }
+      // });
     },
   };
 }

@@ -4,14 +4,16 @@ import PropTypes from "prop-types";
 
 Create.propTypes = {
   handlePost: PropTypes.func,
+  checkCreate: PropTypes.bool,
 };
 
 Create.defaultProps = {
   handlePost: null,
+  checkCreate: false,
 };
 
 function Create(props) {
-  const { handlePost } = props;
+  const { handlePost, checkCreate } = props;
   const [post, setPost] = useState({ image: "bootstrap4.png" });
   let urlImage = [
     "bootstrap4",
@@ -34,8 +36,6 @@ function Create(props) {
   function handleImage(e) {
     setPost({ ...post, image: `${e.target.value}.png` });
   }
-
-  console.log(post);
 
   function handleSubmit(e) {
     console.log("da submit");
@@ -67,7 +67,7 @@ function Create(props) {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="pwd">Content:</label>
+          <label htmlFor="pwd">Content: </label>
           <textarea
             type="text"
             className="form-control"
@@ -84,10 +84,64 @@ function Create(props) {
             ))}
           </select>
         </div>
-        <button type="submit" className="btn btn-success">
+        <button
+          type="submit"
+          className="btn btn-success"
+          data-toggle="modal"
+          data-target="#exampleModal"
+        >
           POST
         </button>
       </form>
+
+      {/* Modal */}
+      <div
+        className="modal fade"
+        id="exampleModal"
+        tabIndex={-1}
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">
+                Create
+              </h5>
+              <button
+                type="button"
+                className="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            {checkCreate ? (
+              <div className="modal-body">
+                <h3 className="text-success">Created successfully</h3>
+              </div>
+            ) : (
+              <div className="modal-body">
+                <h3 className="text-danger">Created Unsuccessfully</h3>
+              </div>
+            )}
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+              <a href="/#content" type="button" className="btn btn-primary">
+                Back to home page
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

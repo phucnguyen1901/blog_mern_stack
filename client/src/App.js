@@ -6,12 +6,7 @@ import Create from "./components/Handle/Create";
 import Delete from "./components/Handle/Delete";
 import Detail from "./components/Content/Detail";
 import React, { useState, useEffect, useRef } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Redirect,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import axios from "axios";
 function App() {
   const pre = useRef(0);
@@ -19,9 +14,7 @@ function App() {
   useEffect(() => {
     async function fetchDataHome() {
       try {
-        const response = await axios.get(
-          "https://blogphuc.herokuapp.com/api/get"
-        );
+        const response = await axios.get("http://localhost:8080/api/get");
         setData(response.data);
       } catch (e) {
         console.log(e);
@@ -31,12 +24,16 @@ function App() {
   }, []);
 
   const [post, setPost] = useState({});
+  const [checkCreate, setCheckCreate] = useState(false);
   useEffect(() => {
     async function HandleArticles() {
       if (Object.entries(post).length !== 0) {
         try {
-          await axios.post("https://blogphuc.herokuapp.com/api/create", post);
-          console.log("Created successfully");
+          const res = await axios.post(
+            "http://localhost:8080/api/create",
+            post
+          );
+          res.data.check ? setCheckCreate(true) : setCheckCreate(false);
           setPost({});
         } catch (e) {
           console.log(e);
@@ -67,18 +64,20 @@ function App() {
     };
   }, []);
 
-  const [id, setId] = useState({});
-  // const [home, setHome] = useState(false);
+  const [id, setId] = useState("");
+  const [check, setCheck] = useState(false);
   useEffect(() => {
     async function deleteArticle() {
-      try {
-        axios
-          .delete(`https://blogphuc.herokuapp.com/api/create`, id)
-          .then(() => console.log("O11K"));
-        console.log("Da co id");
-        console.log("OK");
-      } catch (e) {
-        console.log("Loi :" + e);
+      if (id !== "") {
+        console.log("CO id");
+        try {
+          const res = await axios.delete(
+            `http://localhost:8080/api/delete/${id}`
+          );
+          res.data.check ? setCheck(true) : setCheck(false);
+        } catch (e) {
+          console.log("Loi :" + e);
+        }
       }
     }
     deleteArticle();
@@ -101,13 +100,13 @@ function App() {
             <Me />
           </Route>
           <Route path="/create">
-            <Create handlePost={handlePost} />
+            <Create checkCreate={checkCreate} handlePost={handlePost} />
           </Route>
           <Route path="/article/:id">
             <Detail />
           </Route>
           <Route path="/delete">
-            <Delete handleDeleteId={handleDeleteId} />
+            <Delete check={check} handleDeleteId={handleDeleteId} />
           </Route>
         </Switch>
         <Footer />
