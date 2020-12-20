@@ -1,8 +1,35 @@
 #detail {
+  position: relative;
   padding: 10px;
   box-shadow: #777777 0 0 6px inset;
   margin: 20px auto;
   width: 60%;
+  white-space: normal;
   // margin-top: 20px;
   // background: #c6e2ff;
+}
+
+.imageDetail {
+  width: 100%;
+  height: 300px;
+}
+
+@media only screen and (max-width: 600px) {
+  #detail {
+    position: relative;
+    padding: 10px;
+    box-shadow: #777777 0 0 6px inset;
+    margin: 20px auto;
+    width: 100%;
+    // margin-top: 20px;
+    // background: #c6e2ff;
+  }
+  .imageDetail {
+    width: 100%;
+    height: 200px;
+  }
+}
+
+.break {
+  line-break: anywhere;
 }

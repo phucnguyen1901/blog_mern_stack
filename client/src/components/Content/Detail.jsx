@@ -22,10 +22,18 @@ function Detail() {
   return (
     <div id="detail">
       <h1>{content.title}</h1>
-      {/* {Object.entries(content).length > 0
-        ? content.content.split(".").map((para) => <li>{para}</li>)
-        : null} */}
-      <p>{content.content}</p>
+      <ul>
+        {Object.entries(content).length > 0
+          ? content.content
+              .split("!")
+              .map((para) => <li className="break">{para}</li>)
+          : null}
+      </ul>
+      <img
+        className="mt-3 imageDetail"
+        src={`/images/${content.image}`}
+        alt={`Anh ${content.title}`}
+      />
     </div>
   );
 }
