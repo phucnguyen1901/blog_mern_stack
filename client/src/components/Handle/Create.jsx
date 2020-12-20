@@ -12,7 +12,7 @@ Create.defaultProps = {
 
 function Create(props) {
   const { handlePost } = props;
-  const [post, setPost] = useState({});
+  const [post, setPost] = useState({ image: "bootstrap4.png" });
   let urlImage = [
     "bootstrap4",
     "expressjs",
@@ -34,6 +34,8 @@ function Create(props) {
   function handleImage(e) {
     setPost({ ...post, image: `${e.target.value}.png` });
   }
+
+  console.log(post);
 
   function handleSubmit(e) {
     console.log("da submit");

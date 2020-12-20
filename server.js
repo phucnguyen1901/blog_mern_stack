@@ -12,7 +12,11 @@ app.use(Router);
 
 mongoose.connect(
   process.env.MONGODB,
-  { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: true },
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: true,
+  },
   (e) => {
     if (e) {
       console.log(e);

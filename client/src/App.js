@@ -6,7 +6,12 @@ import Create from "./components/Handle/Create";
 import Delete from "./components/Handle/Delete";
 import Detail from "./components/Content/Detail";
 import React, { useState, useEffect, useRef } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
 import axios from "axios";
 function App() {
   const pre = useRef(0);
@@ -62,17 +67,18 @@ function App() {
     };
   }, []);
 
-  const [id, setId] = useState("");
+  const [id, setId] = useState({});
+  // const [home, setHome] = useState(false);
   useEffect(() => {
     async function deleteArticle() {
-      if (id !== "") {
+      try {
+        axios
+          .delete(`https://blogphuc.herokuapp.com/api/create`, id)
+          .then(() => console.log("O11K"));
         console.log("Da co id");
-        try {
-          await axios.delete(`https://blogphuc.herokuapp.com/api/${id}`);
-          console.log("Deleted successfully");
-        } catch (e) {
-          console.log(e);
-        }
+        console.log("OK");
+      } catch (e) {
+        console.log("Loi :" + e);
       }
     }
     deleteArticle();
@@ -87,6 +93,7 @@ function App() {
       <div>
         <Header checkNavbar={navbar} />
         <Switch>
+          {/* {home ? <Redirect exact from="/delete" to="/" /> : null} */}
           <Route path="/" exact>
             <Content data={data} />
           </Route>
